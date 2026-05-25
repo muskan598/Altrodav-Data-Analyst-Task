@@ -1,0 +1,7 @@
+college_name        | total_students | placed_students | placement_rate_percentage 
+---------------------------+----------------+-----------------+---------------------------
+ PSG College of Tech       |              1 |               1 |                    100.00
+ Ramaiah Institute of Tech |              2 |               2 |                    100.00
+ Amrita College            |              2 |               1 |                     50.00
+ JNTU Hyderabad            |              1 |               0 |                      0.00
+(4 rows)
