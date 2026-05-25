@@ -1,0 +1,5 @@
+      college_name        | avg_days_to_reach_level50 
+---------------------------+---------------------------
+ Amrita College            |                     46.00
+ Ramaiah Institute of Tech |                     49.00
+(2 rows)
