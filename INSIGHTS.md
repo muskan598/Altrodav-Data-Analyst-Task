@@ -1,19 +1,24 @@
-1. High Failure Risk in Python Track (Q2)
-
-The Python skill module shows a failure rate above 40%, indicating difficulty in course completion.
-Altrodav should introduce intermediate checkpoints, structured practice sessions, or mentor support before Level 40 to reduce early dropouts and improve success rates.
-
-2. Very Low Engagement — Only One Student Achieves 7-Day Streak (Q3)
-
-Platform engagement is extremely low, with only one student maintaining a continuous 7-day activity streak.
-To improve retention, Altrodav should implement gamification features such as daily streak rewards, achievement badges, leaderboards, and automated reminders.
-
-3. QIS College Shows Slower Progress in Aptitude (Q1)
+Query 1 — Average Time to Reach Level 50 in Aptitude by College
 
 Students from QIS College take comparatively longer to reach Level 50 in Aptitude.
-This suggests a need for targeted academic intervention, such as personalized learning paths, revision modules, or accelerated training programs to improve performance.
+This indicates a need for targeted academic intervention such as personalized learning plans, aptitude practice sessions, and accelerated revision modules.
 
-4. Significant Placement Rate Variation Across Colleges (Q5)
+Query 2 — Skill Modules with Fail Rate Greater than 40%
 
-There is a noticeable disparity in placement rates among colleges, with some achieving 100% placement while others lag behind.
-Altrodav should analyze skill gaps in lower-performing colleges and strengthen collaboration with high-performing institutions to replicate successful learning patterns.
+The Python and SQL modules show failure rates above 40%, indicating higher learning difficulty and increased dropout risk.
+Altrodav should introduce mentor guidance, checkpoint assessments, and structured practice exercises to improve completion success.
+
+Query 3 — Students with 7+ Day Active Platform Streak
+
+Only one student maintained a continuous 7-day activity streak, showing very low platform engagement.
+Gamification strategies such as streak rewards, achievement badges, leaderboards, and reminder notifications could significantly improve user retention.
+
+Query 4 — Skill Completion Rate by Module
+
+Machine Learning and Data Structures achieved 100% completion rates, while Python and SQL had only 50% completion.
+This suggests students require additional support in technical programming modules compared to concept-oriented subjects.
+
+Query 5 — Top Colleges Ranked by Placement Rate
+
+Placement performance varies significantly across colleges, with some institutions achieving 100% placement while others remain at 0–50%.
+Altrodav should study successful training patterns from high-performing colleges and apply similar placement preparation strategies to lower-performing institutions.
