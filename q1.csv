@@ -1,5 +1,18 @@
-      college_name        | avg_days_to_reach_level50 
----------------------------+---------------------------
- Amrita College            |                     46.00
- Ramaiah Institute of Tech |                     49.00
-(2 rows)
+college_id |         college_name         
+------------+------------------------------
+          1 | QIS College
+          2 | Narayana Engineering College
+          3 | VIT Vellore
+          4 | SRM University
+          5 | Amrita University
+          6 | Anna University
+          7 | JNTU Hyderabad
+          8 | BITS Pilani
+(8 rows)
+
+ college_name         | avg_days_to_level50 
+------------------------------+---------------------
+ Amrita University            | 40.0000000000000000
+ Narayana Engineering College | 34.0000000000000000
+ QIS College                  | 50.0000000000000000
+(3 rows)
