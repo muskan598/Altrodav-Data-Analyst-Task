@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS students CASCADE;
 DROP TABLE IF EXISTS colleges CASCADE;
 
 
--- CREATE TABLES
 
 CREATE TABLE colleges (
     college_id SERIAL PRIMARY KEY,
@@ -49,7 +48,6 @@ CREATE TABLE placements (
     placed BOOLEAN
 );
 
--- INSERT SAMPLE DATA
 
 
 INSERT INTO colleges (college_name) VALUES
@@ -127,7 +125,6 @@ INSERT INTO placements (student_id, placed) VALUES
 (9,TRUE),
 (10,TRUE);
 
--- VIEW TABLE DATA
 
 
 SELECT * FROM colleges;
@@ -156,8 +153,6 @@ WHERE sm.skill_name = 'Aptitude'
 GROUP BY c.college_name;
 
 
--- Q2: Identify skill modules with fail rate
--- greater than 40%
 
 
 SELECT
@@ -209,8 +204,6 @@ FROM streaks
 WHERE streak_length >= 7;
 
 
--- Q4: Calculate skill completion rate for
--- each skill module
 
 SELECT
     sm.skill_name,
@@ -234,8 +227,6 @@ JOIN skill_modules sm
     ON sp.skill_id = sm.skill_id
 GROUP BY sm.skill_name;
 
--- Q5: Top 10 colleges ranked by placement
--- rate
 
 SELECT
     c.college_name,
