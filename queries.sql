@@ -171,9 +171,6 @@ HAVING
     / COUNT(*) > 0.40;
 
 
--- Q3: Count students with 7+ consecutive
--- active-day streak
-
 
 WITH ranked_activity AS (
     SELECT
