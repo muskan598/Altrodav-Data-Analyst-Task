@@ -1,99 +1,107 @@
--- Create colleges table
+
+
+DROP TABLE IF EXISTS placements CASCADE;
+DROP TABLE IF EXISTS daily_activity CASCADE;
+DROP TABLE IF EXISTS student_progress CASCADE;
+DROP TABLE IF EXISTS skill_modules CASCADE;
+DROP TABLE IF EXISTS students CASCADE;
+DROP TABLE IF EXISTS colleges CASCADE;
+
+
+-- CREATE TABLES
+
 CREATE TABLE colleges (
     college_id SERIAL PRIMARY KEY,
     college_name VARCHAR(100)
 );
 
--- Create students table
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
     student_name VARCHAR(100),
-    college_id INT,
-    join_date DATE,
-    FOREIGN KEY (college_id)
-    REFERENCES colleges(college_id)
+    college_id INT REFERENCES colleges(college_id),
+    join_date DATE
 );
 
--- Create skill modules table
 CREATE TABLE skill_modules (
     skill_id SERIAL PRIMARY KEY,
     skill_name VARCHAR(100)
 );
 
--- Create student progress table
 CREATE TABLE student_progress (
     progress_id SERIAL PRIMARY KEY,
-    student_id INT,
-    skill_id INT,
+    student_id INT REFERENCES students(student_id),
+    skill_id INT REFERENCES skill_modules(skill_id),
     level_reached INT,
     completed BOOLEAN,
     failed BOOLEAN,
-    completion_date DATE,
-    FOREIGN KEY (student_id)
-    REFERENCES students(student_id),
-    FOREIGN KEY (skill_id)
-    REFERENCES skill_modules(skill_id)
+    completion_date DATE
 );
 
--- Create daily activity table
 CREATE TABLE daily_activity (
     activity_id SERIAL PRIMARY KEY,
-    student_id INT,
-    activity_date DATE,
-    FOREIGN KEY(student_id)
-    REFERENCES students(student_id)
+    student_id INT REFERENCES students(student_id),
+    activity_date DATE
 );
 
--- Create placements table
 CREATE TABLE placements (
     placement_id SERIAL PRIMARY KEY,
-    student_id INT,
-    placed BOOLEAN,
-    FOREIGN KEY(student_id)
-    REFERENCES students(student_id)
+    student_id INT REFERENCES students(student_id),
+    placed BOOLEAN
 );
 
--- Colleges
-INSERT INTO colleges (college_name)
-VALUES
-('Amrita College'),
-('Ramaiah Institute of Tech'),
+-- INSERT SAMPLE DATA
+
+
+INSERT INTO colleges (college_name) VALUES
+('QIS College'),
+('Narayana Engineering College'),
+('VIT Vellore'),
+('SRM University'),
+('Amrita University'),
+('Anna University'),
 ('JNTU Hyderabad'),
-('PSG College of Tech');
+('BITS Pilani');
 
--- Students
-INSERT INTO students (student_name,college_id,join_date)
-VALUES
-('Aarav',1,'2025-01-05'),
-('Meera',1,'2025-01-08'),
-('Kiran',2,'2025-01-10'),
-('Sneha',2,'2025-01-15'),
-('Rahul',3,'2025-01-20'),
-('Divya',4,'2025-01-25');
+INSERT INTO students (student_name, college_id, join_date) VALUES
+('muskan',1,'2025-01-01'),
+('Rahul',1,'2025-01-10'),
+('Sneha',2,'2025-01-12'),
+('Anjali',2,'2025-01-15'),
+('Arjun',3,'2025-01-20'),
+('Kiran',4,'2025-01-22'),
+('Meera',5,'2025-01-25'),
+('Ravi',6,'2025-01-28'),
+('Divya',7,'2025-02-01'),
+('Aman',8,'2025-02-05');
 
--- Skill modules
-INSERT INTO skill_modules (skill_name)
-VALUES
+INSERT INTO skill_modules (skill_name) VALUES
 ('Aptitude'),
 ('SQL'),
 ('Python'),
-('Machine Learning');
+('Machine Learning'),
+('Data Structures');
 
--- Student Progress
-INSERT INTO student_progress
-(student_id,skill_id,level_reached,
-completed,failed,completion_date)
+INSERT INTO student_progress (
+    student_id,
+    skill_id,
+    level_reached,
+    completed,
+    failed,
+    completion_date
+)
 VALUES
 (1,1,55,TRUE,FALSE,'2025-02-20'),
-(2,1,45,FALSE,TRUE,'2025-02-25'),
-(3,2,70,TRUE,FALSE,'2025-03-01'),
-(4,1,65,TRUE,FALSE,'2025-03-05'),
-(5,3,40,FALSE,TRUE,'2025-03-10'),
-(6,4,80,TRUE,FALSE,'2025-03-15');
+(2,1,35,FALSE,TRUE,'2025-02-22'),
+(3,1,60,TRUE,FALSE,'2025-02-15'),
+(4,2,70,TRUE,FALSE,'2025-03-01'),
+(5,3,40,FALSE,TRUE,'2025-03-03'),
+(6,4,80,TRUE,FALSE,'2025-03-05'),
+(7,1,52,TRUE,FALSE,'2025-03-06'),
+(8,2,45,FALSE,TRUE,'2025-03-07'),
+(9,3,75,TRUE,FALSE,'2025-03-08'),
+(10,5,65,TRUE,FALSE,'2025-03-09');
 
--- Daily activity
-INSERT INTO daily_activity (student_id,activity_date)
-VALUES
+INSERT INTO daily_activity (student_id, activity_date) VALUES
 (1,'2025-04-01'),
 (1,'2025-04-02'),
 (1,'2025-04-03'),
@@ -103,30 +111,39 @@ VALUES
 (1,'2025-04-07'),
 (2,'2025-04-01'),
 (2,'2025-04-02'),
-(3,'2025-04-03'),
-(3,'2025-04-04'),
-(3,'2025-04-05'),
-(3,'2025-04-06'),
-(3,'2025-04-07');
+(2,'2025-04-03'),
+(3,'2025-04-01'),
+(3,'2025-04-02');
 
--- Placements
-INSERT INTO placements(student_id,placed)
-VALUES
+INSERT INTO placements (student_id, placed) VALUES
 (1,TRUE),
 (2,FALSE),
 (3,TRUE),
 (4,TRUE),
 (5,FALSE),
-(6,TRUE);
+(6,TRUE),
+(7,TRUE),
+(8,FALSE),
+(9,TRUE),
+(10,TRUE);
+
+-- VIEW TABLE DATA
 
 
--- Q1: Average time taken to reach Level 50 in Aptitude by college
-SELECT 
+SELECT * FROM colleges;
+SELECT * FROM students;
+SELECT * FROM skill_modules;
+SELECT * FROM student_progress;
+SELECT * FROM daily_activity;
+SELECT * FROM placements;
+
+-- Q1: Average time taken to reach Level 50
+-- in Aptitude by college
+
+
+SELECT
     c.college_name,
-    ROUND(
-        AVG((sp.completion_date - s.join_date)::INT),
-        2
-    ) AS avg_days_to_reach_level50
+    AVG(sp.completion_date - s.join_date) AS avg_days_to_level50
 FROM student_progress sp
 JOIN students s
     ON sp.student_id = s.student_id
@@ -135,95 +152,113 @@ JOIN colleges c
 JOIN skill_modules sm
     ON sp.skill_id = sm.skill_id
 WHERE sm.skill_name = 'Aptitude'
-AND sp.level_reached >= 50
-GROUP BY c.college_name
-ORDER BY avg_days_to_reach_level50;
+  AND sp.level_reached >= 50
+GROUP BY c.college_name;
 
 
--- Q2: Structural tracks with fail rate > 40%
+-- Q2: Identify skill modules with fail rate
+-- greater than 40%
+
+
 SELECT
     sm.skill_name,
-    COUNT(*) AS total_students,
-    SUM(CASE WHEN sp.failed = TRUE THEN 1 ELSE 0 END) AS failed_students,
+    COUNT(*) AS total_attempts,
+    SUM(CASE WHEN sp.failed THEN 1 ELSE 0 END) AS failed_count,
     ROUND(
-        (
-            SUM(CASE WHEN sp.failed = TRUE THEN 1 ELSE 0 END)::DECIMAL
-            / COUNT(*)
-        ) * 100,
+        SUM(CASE WHEN sp.failed THEN 1 ELSE 0 END) * 100.0
+        / COUNT(*),
         2
-    ) AS fail_rate_percentage
-FROM student_progress sp
-JOIN skill_modules sm
-ON sp.skill_id = sm.skill_id
-GROUP BY sm.skill_name
-HAVING (
-    SUM(CASE WHEN sp.failed = TRUE THEN 1 ELSE 0 END)::DECIMAL
-    / COUNT(*)
-) > 0.40
-ORDER BY fail_rate_percentage DESC;
-
-
--- Q3: Count unique students with 7+ day active streak (FIXED)
-WITH streaks AS (
-    SELECT
-        student_id,
-        activity_date,
-        (activity_date::date
-         - ROW_NUMBER() OVER (
-            PARTITION BY student_id
-            ORDER BY activity_date
-         )::INT
-        ) AS streak_group
-    FROM daily_activity
-)
-SELECT
-    COUNT(DISTINCT student_id) AS students_with_7plus_day_streak
-FROM (
-    SELECT
-        student_id,
-        COUNT(*) AS streak_length
-    FROM streaks
-    GROUP BY student_id, streak_group
-) s
-WHERE streak_length >= 7;
-
-
--- Q4: Skill completion rate per skill module
-SELECT
-    sm.skill_name,
-    COUNT(DISTINCT sp.student_id) AS total_students,
-    COUNT(DISTINCT CASE 
-        WHEN sp.completed = TRUE THEN sp.student_id 
-    END) AS completed_students,
-    ROUND(
-        COUNT(DISTINCT CASE 
-            WHEN sp.completed = TRUE THEN sp.student_id 
-        END) * 100.0
-        / COUNT(DISTINCT sp.student_id),
-        2
-    ) AS completion_rate_percentage
+    ) AS fail_rate
 FROM student_progress sp
 JOIN skill_modules sm
     ON sp.skill_id = sm.skill_id
 GROUP BY sm.skill_name
-ORDER BY completion_rate_percentage DESC;
+HAVING
+    SUM(CASE WHEN sp.failed THEN 1 ELSE 0 END)::FLOAT
+    / COUNT(*) > 0.40;
 
 
--- Q5: Top colleges by placement rate
+-- Q3: Count students with 7+ consecutive
+-- active-day streak
+
+
+WITH ranked_activity AS (
+    SELECT
+        student_id,
+        activity_date,
+        activity_date - (
+            ROW_NUMBER() OVER (
+                PARTITION BY student_id
+                ORDER BY activity_date
+            ) * INTERVAL '1 day'
+        ) AS streak_group
+    FROM daily_activity
+),
+
+streaks AS (
+    SELECT
+        student_id,
+        COUNT(*) AS streak_length
+    FROM ranked_activity
+    GROUP BY student_id, streak_group
+)
+
+SELECT
+    COUNT(DISTINCT student_id) AS students_with_7plus_streak
+FROM streaks
+WHERE streak_length >= 7;
+
+
+-- Q4: Calculate skill completion rate for
+-- each skill module
+
+SELECT
+    sm.skill_name,
+    COUNT(DISTINCT sp.student_id) AS total_students,
+    COUNT(
+        DISTINCT CASE
+            WHEN sp.completed THEN sp.student_id
+        END
+    ) AS completed_students,
+    ROUND(
+        COUNT(
+            DISTINCT CASE
+                WHEN sp.completed THEN sp.student_id
+            END
+        ) * 100.0
+        / COUNT(DISTINCT sp.student_id),
+        2
+    ) AS completion_rate
+FROM student_progress sp
+JOIN skill_modules sm
+    ON sp.skill_id = sm.skill_id
+GROUP BY sm.skill_name;
+
+-- Q5: Top 10 colleges ranked by placement
+-- rate
+
 SELECT
     c.college_name,
-    COUNT(DISTINCT p.student_id) AS total_students,
-    SUM(CASE WHEN p.placed = TRUE THEN 1 ELSE 0 END) AS placed_students,
+    COUNT(DISTINCT s.student_id) AS total_students,
+    COUNT(
+        DISTINCT CASE
+            WHEN p.placed THEN s.student_id
+        END
+    ) AS placed_students,
     ROUND(
-        SUM(CASE WHEN p.placed = TRUE THEN 1 ELSE 0 END)::DECIMAL
-        / COUNT(DISTINCT p.student_id) * 100,
+        COUNT(
+            DISTINCT CASE
+                WHEN p.placed THEN s.student_id
+            END
+        ) * 100.0
+        / COUNT(DISTINCT s.student_id),
         2
-    ) AS placement_rate_percentage
+    ) AS placement_rate
 FROM placements p
 JOIN students s
     ON p.student_id = s.student_id
 JOIN colleges c
     ON s.college_id = c.college_id
 GROUP BY c.college_name
-ORDER BY placement_rate_percentage DESC
+ORDER BY placement_rate DESC
 LIMIT 10;
