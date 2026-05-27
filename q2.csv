@@ -1,4 +1,14 @@
-skill_name | total_students | failed_students | fail_rate_percentage 
-------------+----------------+-----------------+----------------------
- Python     |              1 |               1 |               100.00
-(1 row)
+skill_id |    skill_name    
+----------+------------------
+        1 | Aptitude
+        2 | SQL
+        3 | Python
+        4 | Machine Learning
+        5 | Data Structures
+(5 rows)
+
+ skill_name | total_attempts | failed_count | fail_rate 
+------------+----------------+--------------+-----------
+ Python     |              2 |            1 |     50.00
+ SQL        |              2 |            1 |     50.00
+(2 rows)
