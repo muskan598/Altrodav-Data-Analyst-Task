@@ -134,8 +134,6 @@ SELECT * FROM student_progress;
 SELECT * FROM daily_activity;
 SELECT * FROM placements;
 
--- Q1: Average time taken to reach Level 50
--- in Aptitude by college
 
 
 SELECT
