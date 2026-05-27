@@ -1,7 +1,9 @@
-skill_name    | total_students | completed_students | completion_rate_percentage 
-------------------+----------------+--------------------+----------------------------
- Machine Learning |              1 |                  1 |                     100.00
- SQL              |              1 |                  1 |                     100.00
- Aptitude         |              3 |                  2 |                      66.67
- Python           |              1 |                  0 |                       0.00
-(4 rows)
+skill_name    | total_students | completed_students | completion_rate 
+------------------+----------------+--------------------+-----------------
+ Aptitude         |              4 |                  3 |           75.00
+ Data Structures  |              1 |                  1 |          100.00
+ Machine Learning |              1 |                  1 |          100.00
+ Python           |              2 |                  1 |           50.00
+ SQL              |              2 |                  1 |           50.00
+(5 rows)
+
