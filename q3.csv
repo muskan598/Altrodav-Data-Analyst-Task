@@ -1,4 +1,18 @@
-students_with_7plus_day_streak 
---------------------------------
-                              1
+student_id | student_name | college_id | join_date  
+------------+--------------+------------+------------
+          1 | muskan       |          1 | 2025-01-01
+          2 | Rahul        |          1 | 2025-01-10
+          3 | Sneha        |          2 | 2025-01-12
+          4 | Anjali       |          2 | 2025-01-15
+          5 | Arjun        |          3 | 2025-01-20
+          6 | Kiran        |          4 | 2025-01-22
+          7 | Meera        |          5 | 2025-01-25
+          8 | Ravi         |          6 | 2025-01-28
+          9 | Divya        |          7 | 2025-02-01
+         10 | Aman         |          8 | 2025-02-05
+(10 rows)
+
+students_with_7plus_streak 
+----------------------------
+                          1
 (1 row)
